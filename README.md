@@ -25,4 +25,7 @@ Vercel redeploys on every push to `main`.
 
 ## Deploying
 
-Static site, no framework. Vercel serves the repository root as-is.
+Live at <https://cloie-cagas-portfolio.vercel.app>.
+
+Static site, no framework: Vercel serves the repository root as-is, and `404.html`
+is picked up automatically for unknown paths. Pushing to `main` redeploys.
