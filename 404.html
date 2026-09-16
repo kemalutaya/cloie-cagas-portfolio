@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Cloie Cagas | Virtual Assistant</title>
+<meta name="description" content="That page does not exist. Head back to Cloie Eunice C. Cagas' virtual assistant portfolio, or get in touch by email or phone.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#161616">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23161616'/><text x='32' y='44' font-family='Arial,Helvetica,sans-serif' font-weight='bold' font-size='30' fill='%23F04A64' text-anchor='middle'>CC</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#161616;--surface:#1F1D1D;--ink:#F2EDEA;--ink-soft:#B8AFAB;--ink-faint:#A79E99;
+    --wine:#F04A64;--wine-deep:#C20E2C;--wine-press:#96091F;--gold:#E3A82B;
+    --line:rgba(255,255,255,.11);--line-strong:rgba(255,255,255,.2);
+  }
+  *{box-sizing:border-box;}
+  html,body{max-width:100%;overflow-x:hidden;}
+  body{
+    margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+    font-family:"Work Sans",sans-serif;line-height:1.55;
+    display:flex;align-items:center;justify-content:center;padding:2rem 1.15rem;
+    background-image:radial-gradient(120% 90% at 78% 18%,rgba(150,16,42,.34) 0%,rgba(60,10,20,.10) 42%,transparent 72%);
+  }
+  .box{max-width:560px;width:100%;}
+  .eyebrow{
+    display:flex;align-items:center;gap:.6rem;margin:0 0 1rem;
+    font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);flex:none;}
+  .code{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(3.4rem,14vw,5.5rem);line-height:1;margin:0;letter-spacing:-.02em;}
+  h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(1.4rem,5vw,2rem);line-height:1.15;margin:.8rem 0 .6rem;}
+  p{color:var(--ink-soft);margin:0 0 1.6rem;}
+  .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2rem;}
+  .btn{
+    font-size:.86rem;font-weight:600;text-decoration:none;padding:.7rem 1.3rem;border-radius:3px;
+    border:1px solid var(--wine-deep);background:var(--wine-deep);color:#FFFFFF;
+    transition:background 170ms cubic-bezier(.4,0,.2,1),color 170ms cubic-bezier(.4,0,.2,1);
+  }
+  .btn:hover{background:var(--wine-press);border-color:var(--wine-press);}
+  .btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--wine);color:var(--wine);}
+  .links{border-top:1px solid var(--line);padding-top:1.2rem;display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;font-size:.86rem;}
+  .links a{color:var(--ink-soft);text-decoration:none;overflow-wrap:anywhere;}
+  .links a:hover{color:var(--wine);}
+  footer{margin-top:1.6rem;font-size:.78rem;color:var(--ink-faint);}
+</style>
+</head>
+<body>
+  <main class="box">
+    <p class="eyebrow">Cloie&nbsp;Cagas</p>
+    <p class="code">404</p>
+    <h1>This page took a wrong turn.</h1>
+    <p>The link may be outdated or mistyped. Everything — case studies, proof of work, services, and contact details — lives on the main portfolio.</p>
+    <div class="actions">
+      <a class="btn" href="/">Back to the portfolio</a>
+      <a class="btn ghost" href="mailto:cloie.theva28@gmail.com?subject=Project%20enquiry">Email Cloie</a>
+    </div>
+    <div class="links">
+      <a href="/#work">Case Studies</a>
+      <a href="/#proof">Proof of Work</a>
+      <a href="/#services">Services</a>
+      <a href="/#contact">Contact</a>
+      <a href="tel:+639105610961">0910 561 0961</a>
+    </div>
+    <footer>&copy; <span id="year">2026</span> Cloie Eunice C. Cagas</footer>
+  </main>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
