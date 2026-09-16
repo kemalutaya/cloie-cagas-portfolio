@@ -247,6 +247,7 @@
     font-size:clamp(1.1rem,2vw,1.42rem);line-height:1.52;
     margin:0;max-width:62ch;
   }
+  .about-panel--audio > *{min-width:0;}
   .about-panel--audio{
     display:grid;grid-template-columns:1.6fr .9fr;gap:clamp(1.4rem,3vw,2.6rem);align-items:center;
   }
@@ -525,6 +526,166 @@
     #scroll-progress{transition:none;}
     .btn-ripple{display:none;}
   }
+
+  /* ============ ported components ============ */
+  /* border trail (motion-primitives) */
+  @property --trail-angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+  .case--trail{position:relative;isolation:isolate;}
+  .case--trail::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+    background:conic-gradient(from var(--trail-angle),transparent 0 72%,var(--wine-soft) 86%,var(--gold) 93%,transparent 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+    animation:trail-spin 7s linear infinite;
+  }
+  @keyframes trail-spin{to{--trail-angle:360deg;}}
+
+  /* glow effect (motion-primitives) */
+  @property --glow-angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+  .glow-wrap{position:relative;display:inline-flex;border-radius:5px;}
+  .glow-wrap::before{
+    content:"";position:absolute;inset:-3px;border-radius:inherit;z-index:0;
+    background:conic-gradient(from var(--glow-angle),var(--wine-soft),var(--gold),var(--wine-deep),var(--wine-soft));
+    filter:blur(10px);opacity:0;transition:opacity .35s var(--ease-soft);
+    animation:glow-spin 6s linear infinite;
+  }
+  .glow-wrap:hover::before,.glow-wrap:focus-within::before{opacity:.7;}
+  .glow-wrap > .btn{position:relative;z-index:1;}
+  @keyframes glow-spin{to{--glow-angle:360deg;}}
+
+  /* stats rim + cursor glow (watermelon stats-4) */
+  .trust > div{
+    position:relative;border:1px solid transparent;border-radius:12px;
+    padding:.85rem .95rem;background:var(--surface);overflow:hidden;
+    transition:border-color var(--dur) var(--ease-soft);
+  }
+  .trust > div::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+    transition:opacity .3s var(--ease-soft);
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--wine) 26%,transparent),transparent 62%);
+  }
+  .trust > div:hover{border-color:var(--line);}
+  .trust > div:hover::before{opacity:1;}
+  .trust > div > *{position:relative;z-index:1;}
+
+  /* status badge (watermelon) */
+  .portrait-tag{display:inline-flex;align-items:center;gap:.45rem;}
+  .portrait-tag::before{
+    content:"";width:7px;height:7px;border-radius:50%;background:#43C57C;flex:none;
+    animation:pulse-dot 2.4s ease-out infinite;
+  }
+  @keyframes pulse-dot{
+    0%{box-shadow:0 0 0 0 color-mix(in srgb,#43C57C 60%,transparent);}
+    70%{box-shadow:0 0 0 8px transparent;}
+    100%{box-shadow:0 0 0 0 transparent;}
+  }
+
+  /* text effect (motion-primitives) */
+  .te span{display:inline-block;opacity:0;transform:translateY(16px);filter:blur(5px);
+    animation:te-in .7s var(--ease-out) forwards;animation-delay:calc(var(--i) * 90ms);}
+  @keyframes te-in{to{opacity:1;transform:none;filter:blur(0);}}
+
+  /* tooltip (watermelon) */
+  .tool-card li{position:relative;}
+  .tool-card li[data-tip]{cursor:help;}
+  .tool-card li[data-tip]::after{
+    content:attr(data-tip);position:absolute;left:0;bottom:calc(100% + 8px);z-index:20;
+    width:max-content;max-width:210px;padding:.4rem .6rem;border-radius:8px;
+    background:var(--bg);border:1px solid var(--line-strong);color:var(--ink);
+    font-size:.74rem;line-height:1.35;letter-spacing:0;text-transform:none;
+    opacity:0;transform:translateY(4px);pointer-events:none;
+    transition:opacity .18s var(--ease-soft),transform .18s var(--ease-soft);
+  }
+  .tool-card li[data-tip]:hover::after,.tool-card li[data-tip]:focus-visible::after{opacity:1;transform:none;}
+
+  /* marquee (watermelon) */
+  .marquee{
+    margin-top:2rem;display:flex;gap:1rem;overflow:hidden;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  }
+  .marquee-row{display:flex;gap:1rem;flex:none;animation:marquee-x 38s linear infinite;}
+  .marquee:hover .marquee-row{animation-play-state:paused;}
+  .marquee span{
+    flex:none;font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:999px;padding:.35rem .9rem;white-space:nowrap;
+  }
+  @keyframes marquee-x{to{transform:translateX(calc(-100% - 1rem));}}
+
+  /* progressive blur + lightbox (motion-primitives) */
+  .proof-shot{position:relative;}
+  .shot-btn{
+    display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;line-height:0;
+    position:relative;max-height:330px;overflow:hidden;
+  }
+  .shot-btn img{width:100%;height:auto;display:block;}
+  .shot-fade{
+    position:absolute;left:0;right:0;bottom:0;height:96px;pointer-events:none;
+    background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--surface-2) 92%,transparent));
+    backdrop-filter:blur(1.2px);-webkit-backdrop-filter:blur(1.2px);
+    -webkit-mask-image:linear-gradient(to bottom,transparent,#000 70%);
+    mask-image:linear-gradient(to bottom,transparent,#000 70%);
+  }
+  .shot-cue{
+    position:absolute;right:.7rem;bottom:.7rem;z-index:2;pointer-events:none;
+    font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);
+    background:color-mix(in srgb,var(--bg) 82%,transparent);border:1px solid var(--line-strong);
+    border-radius:999px;padding:.25rem .6rem;
+  }
+  dialog.lightbox{
+    border:0;padding:0;background:transparent;max-width:min(96vw,1200px);max-height:92vh;color:var(--ink);
+  }
+  dialog.lightbox::backdrop{background:rgba(10,8,8,.82);}
+  dialog.lightbox img{width:100%;height:auto;border-radius:12px;display:block;}
+  .lightbox-bar{
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    margin-top:.7rem;font-size:.8rem;color:var(--ink-faint);
+  }
+  .lightbox-bar button{
+    font:inherit;cursor:pointer;background:transparent;color:var(--ink);
+    border:1px solid var(--line-strong);border-radius:999px;padding:.35rem .9rem;
+  }
+  .lightbox-bar button:hover{border-color:var(--wine);color:var(--wine);}
+
+  /* audio player with waveform (watermelon) */
+  .wave-player{display:flex;align-items:center;gap:.85rem;margin:.2rem 0 0;}
+  .wp-play{
+    flex:none;width:44px;height:44px;border-radius:50%;cursor:pointer;
+    border:1px solid var(--line-strong);background:var(--surface-2);color:var(--wine);
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color var(--dur) var(--ease-soft),background var(--dur) var(--ease-soft);
+  }
+  .wp-play:hover{border-color:var(--wine);background:color-mix(in srgb,var(--wine) 10%,var(--surface-2));}
+  .wp-play svg{width:15px;height:15px;}
+  .wp-wave{
+    flex:1;display:flex;align-items:center;gap:2px;height:38px;cursor:pointer;border:0;background:none;padding:0;
+  }
+  .wp-wave i{flex:1;border-radius:2px;background:var(--line-strong);transition:background .12s linear;min-width:2px;}
+  .wp-wave i.on{background:var(--wine);}
+  .wp-time{flex:none;font-size:.76rem;color:var(--ink-faint);font-variant-numeric:tabular-nums;}
+
+  /* copy confirm (watermelon) */
+  .copy-email{position:relative;}
+  .copy-email .cp-label{display:inline-flex;align-items:center;gap:.4rem;transition:opacity .2s var(--ease-soft),transform .2s var(--ease-soft),filter .2s var(--ease-soft);}
+  .copy-email.is-copied{border-color:#43C57C;color:#43C57C;}
+  .copy-email.is-copied .cp-copy{opacity:0;transform:scale(.7);filter:blur(4px);position:absolute;}
+  .copy-email .cp-done{opacity:0;transform:scale(.7);filter:blur(4px);position:absolute;}
+  .copy-email.is-copied .cp-done{opacity:1;transform:none;filter:blur(0);position:static;}
+
+  @media (max-width:560px){
+    .marquee-row{animation-duration:24s;}
+    .shot-btn{max-height:240px;}
+    .wp-wave i{min-width:1px;}
+    .wp-wave i:nth-child(n+25){display:none;}
+    .wave-player{gap:.6rem;}
+    .wp-time{font-size:.72rem;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .case--trail::after,.glow-wrap::before,.marquee-row,.portrait-tag::before{animation:none;}
+    .te span{animation:none;opacity:1;transform:none;filter:none;}
+  }
+
   /* ---------- mobile hardening / overflow ---------- */
   html,body{max-width:100%;overflow-x:hidden;}
   img,svg,video,iframe,canvas{max-width:100%;height:auto;}
@@ -642,7 +803,7 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1>Cloie Eunice<br><em>Cagas</em></h1>
+        <h1 class="te"><span style="--i:0">Cloie</span> <span style="--i:1">Eunice</span><br><em><span style="--i:2">Cagas</span></em></h1>
         <p class="hero-role">
           Lead Generation <span class="sep">·</span> Appointment Setting <span class="sep">·</span> CRM &amp; Client Support
         </p>
@@ -650,7 +811,7 @@
           I help real estate and insurance teams turn cold lists into booked appointments, running the calls, the follow-ups, and the CRM hygiene that keeps a pipeline honest.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#contact">Book a 15-min call</a>
+          <span class="glow-wrap"><a class="btn btn-primary" href="#contact">Book a 15-min call</a></span>
           <a class="btn btn-ghost" href="#work">See case studies</a>
         </div>
       </div>
@@ -716,7 +877,7 @@
 
       <div class="cases">
 
-        <article class="case">
+        <article class="case case--trail">
           <div class="case-id">
             <p class="case-client">US Real Estate Acquisitions</p>
             <h3>Outbound calling &amp; appointment setting for an acquisitions team</h3>
@@ -818,9 +979,7 @@
 
         <article class="proof-item">
           <figure class="proof-shot">
-            <a href="assets/crm-pipeline-board.jpg" target="_blank" rel="noopener" aria-label="Open the full-size crm pipeline board sample">
-              <img src="assets/crm-pipeline-board.jpg" alt="GoHighLevel Opportunities board, Texas market, 70 open opportunities" loading="lazy" decoding="async">
-            </a>
+            <button type="button" class="shot-btn" data-full="assets/crm-pipeline-board.jpg" data-caption="GoHighLevel Opportunities board, Texas market, 70 open opportunities"><img src="assets/crm-pipeline-board.jpg" alt="GoHighLevel Opportunities board, Texas market, 70 open opportunities" loading="lazy" decoding="async"><span class="shot-fade"></span><span class="shot-cue">Click to expand</span></button>
             <figcaption>GoHighLevel Opportunities board, Texas market, 70 open opportunities</figcaption>
           </figure>
           <div class="proof-body">
@@ -833,9 +992,7 @@
 
         <article class="proof-item">
           <figure class="proof-shot">
-            <a href="assets/appointment-tracker.jpg" target="_blank" rel="noopener" aria-label="Open the full-size appointment tracker sample">
-              <img src="assets/appointment-tracker.jpg" alt="Daily call sheet: offer claimed, lead condition, notes, and five outcome checkpoints" loading="lazy" decoding="async">
-            </a>
+            <button type="button" class="shot-btn" data-full="assets/appointment-tracker.jpg" data-caption="Daily call sheet: offer claimed, lead condition, notes, and five outcome checkpoints"><img src="assets/appointment-tracker.jpg" alt="Daily call sheet: offer claimed, lead condition, notes, and five outcome checkpoints" loading="lazy" decoding="async"><span class="shot-fade"></span><span class="shot-cue">Click to expand</span></button>
             <figcaption>Daily call sheet: offer claimed, lead condition, notes, and five outcome checkpoints</figcaption>
           </figure>
           <div class="proof-body">
@@ -848,9 +1005,7 @@
 
         <article class="proof-item">
           <figure class="proof-shot">
-            <a href="assets/cold-call-script.jpg" target="_blank" rel="noopener" aria-label="Open the full-size cold call script sample">
-              <img src="assets/cold-call-script.jpg" alt="Seller-lead script: intro, property condition, price and timeline, loan question" loading="lazy" decoding="async">
-            </a>
+            <button type="button" class="shot-btn" data-full="assets/cold-call-script.jpg" data-caption="Seller-lead script: intro, property condition, price and timeline, loan question"><img src="assets/cold-call-script.jpg" alt="Seller-lead script: intro, property condition, price and timeline, loan question" loading="lazy" decoding="async"><span class="shot-fade"></span><span class="shot-cue">Click to expand</span></button>
             <figcaption>Seller-lead script: intro, property condition, price and timeline, loan question</figcaption>
           </figure>
           <div class="proof-body">
@@ -1012,11 +1167,11 @@
       <div class="tool-groups">
         <div class="tool-card">
           <h3>CRM &amp; Lead Gen</h3>
-          <ul><li>GoHighLevel</li><li>REISift</li><li>Zillow</li><li>Redfin</li><li>SalesQL</li><li>Launch Control</li></ul>
+          <ul><li tabindex="0" data-tip="CRM and pipeline: stages, tasks, SMS and email sequences">GoHighLevel</li><li tabindex="0" data-tip="Property list management, skip tracing and list stacking">REISift</li><li tabindex="0" data-tip="Property values, listing history and owner research">Zillow</li><li tabindex="0" data-tip="Comparable sales and neighbourhood pricing checks">Redfin</li><li tabindex="0" data-tip="Pulls verified contact details from LinkedIn profiles">SalesQL</li><li tabindex="0" data-tip="SMS outreach to property owner lists">Launch Control</li></ul>
         </div>
         <div class="tool-card">
           <h3>Dialers &amp; Comms</h3>
-          <ul><li>Convoso</li><li>Flowchat</li><li>Outlook</li></ul>
+          <ul><li tabindex="0" data-tip="Outbound dialer for high volume calling campaigns">Convoso</li><li tabindex="0" data-tip="Tracks conversations and follow ups across social channels">Flowchat</li><li>Outlook</li></ul>
         </div>
         <div class="tool-card">
           <h3>Productivity</h3>
@@ -1026,6 +1181,10 @@
           <h3>Design &amp; Marketing</h3>
           <ul><li>Canva</li><li>CapCut</li><li>LinkedIn</li></ul>
         </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-row"><span>GoHighLevel</span><span>REISift</span><span>Convoso</span><span>Launch Control</span><span>SalesQL</span><span>Flowchat</span><span>Zillow</span><span>Redfin</span><span>Google Workspace</span><span>Google Calendar</span><span>Outlook</span><span>Trello</span><span>Notion</span><span>Canva</span><span>CapCut</span><span>LinkedIn</span></div>
+        <div class="marquee-row"><span>GoHighLevel</span><span>REISift</span><span>Convoso</span><span>Launch Control</span><span>SalesQL</span><span>Flowchat</span><span>Zillow</span><span>Redfin</span><span>Google Workspace</span><span>Google Calendar</span><span>Outlook</span><span>Trello</span><span>Notion</span><span>Canva</span><span>CapCut</span><span>LinkedIn</span></div>
       </div>
     </div>
   </section>
@@ -1086,8 +1245,8 @@
           <a href="mailto:cloie.theva28@gmail.com">cloie.theva28@gmail.com</a>
           <a href="tel:+639105610961">0910 561 0961</a>
           <span>Surigao City, Philippines</span>
-          <a class="book-btn" href="mailto:cloie.theva28@gmail.com?subject=Project%20enquiry">Send a message</a>
-          <button type="button" class="copy-email" data-copy="cloie.theva28@gmail.com">Copy email</button>
+          <span class="glow-wrap" style="border-radius:999px;display:flex;"><a class="book-btn" href="mailto:cloie.theva28@gmail.com?subject=Project%20enquiry" style="position:relative;z-index:1;width:100%;">Send a message</a></span>
+          <button type="button" class="copy-email" data-copy="cloie.theva28@gmail.com"><span class="cp-label cp-copy">Copy email</span><span class="cp-label cp-done">Copied</span></button>
         </div>
       </div>
     </div>
@@ -1241,7 +1400,11 @@
   document.querySelectorAll('.copy-email').forEach(function(btn){
     btn.addEventListener('click', function(){
       var value = btn.dataset.copy;
-      function ok(){ window.toast('Email copied: ' + value, 'ok'); }
+      function ok(){
+        window.toast('Email copied: ' + value, 'ok');
+        btn.classList.add('is-copied');
+        setTimeout(function(){ btn.classList.remove('is-copied'); }, 1800);
+      }
       function fail(){ window.toast('Could not copy automatically. The address is ' + value, 'err'); }
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(value).then(ok, fail);
@@ -1254,6 +1417,113 @@
       }
     });
   });
+})();
+</script>
+<dialog class="lightbox" aria-label="Work sample">
+  <img alt="">
+  <div class="lightbox-bar"><span class="lightbox-caption"></span><button type="button" class="lightbox-close">Close</button></div>
+</dialog>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- cursor glow on the stat tiles (watermelon stats-4) ----
+  var trust = document.querySelector('.trust');
+  if (trust) {
+    trust.addEventListener('mousemove', function(e){
+      var tile = e.target.closest('.trust > div');
+      if (!tile) return;
+      var r = tile.getBoundingClientRect();
+      tile.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      tile.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  }
+
+  // ---- lightbox for the work samples (motion-primitives dialog) ----
+  var dlg = document.querySelector('dialog.lightbox');
+  if (dlg) {
+    var dlgImg = dlg.querySelector('img');
+    var dlgCap = dlg.querySelector('.lightbox-caption');
+    document.addEventListener('click', function(e){
+      var btn = e.target.closest('.shot-btn');
+      if (btn) {
+        dlgImg.src = btn.dataset.full;
+        dlgImg.alt = btn.dataset.caption || '';
+        dlgCap.textContent = btn.dataset.caption || '';
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else window.open(btn.dataset.full, '_blank', 'noopener');
+        return;
+      }
+      if (e.target.closest('.lightbox-close')) dlg.close();
+    });
+    dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+  }
+
+  // ---- waveform audio player (watermelon audio-player-with-waveform) ----
+  var audio = document.querySelector('.voice-intro audio');
+  if (audio) {
+    var BARS = 46;
+    var heights = [];
+    for (var i = 0; i < BARS; i++) {
+      // a fixed, seeded pattern: decorative, but the fill below tracks real playback
+      var v = Math.abs(Math.sin(i * 1.7) * 0.55 + Math.sin(i * 0.6) * 0.35);
+      heights.push(Math.round(24 + v * 62));
+    }
+    var wrap = document.createElement('div');
+    wrap.className = 'wave-player';
+    wrap.innerHTML =
+      '<button type="button" class="wp-play" aria-label="Play the voice introduction">' +
+        '<svg viewBox="0 0 12 14" fill="currentColor" aria-hidden="true"><path d="M1 1.2v11.6a.6.6 0 0 0 .92.5l9.2-5.8a.6.6 0 0 0 0-1L1.92.7A.6.6 0 0 0 1 1.2Z"/></svg>' +
+      '</button>' +
+      '<button type="button" class="wp-wave" aria-label="Seek within the recording">' +
+        heights.map(function(h){ return '<i style="height:' + h + '%"></i>'; }).join('') +
+      '</button>' +
+      '<span class="wp-time">0:00</span>';
+    audio.parentNode.insertBefore(wrap, audio);
+    audio.removeAttribute('controls');
+    audio.style.display = 'none';
+
+    var playBtn = wrap.querySelector('.wp-play');
+    var wave = wrap.querySelector('.wp-wave');
+    var bars = wrap.querySelectorAll('.wp-wave i');
+    var time = wrap.querySelector('.wp-time');
+    var PLAY = playBtn.innerHTML;
+    var PAUSE = '<svg viewBox="0 0 12 14" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="3.6" height="12" rx="1"/><rect x="7.4" y="1" width="3.6" height="12" rx="1"/></svg>';
+
+    function fmt(t){
+      if (!isFinite(t)) return '0:00';
+      var m = Math.floor(t / 60), sec = Math.floor(t % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+    function paint(){
+      var ratio = audio.duration ? audio.currentTime / audio.duration : 0;
+      var lit = Math.round(ratio * bars.length);
+      for (var i = 0; i < bars.length; i++) bars[i].classList.toggle('on', i < lit);
+      time.textContent = fmt(audio.currentTime) + (audio.duration ? ' / ' + fmt(audio.duration) : '');
+    }
+    playBtn.addEventListener('click', function(){
+      if (audio.paused) audio.play(); else audio.pause();
+    });
+    audio.addEventListener('play', function(){
+      playBtn.innerHTML = PAUSE;
+      playBtn.setAttribute('aria-label', 'Pause the voice introduction');
+    });
+    audio.addEventListener('pause', function(){
+      playBtn.innerHTML = PLAY;
+      playBtn.setAttribute('aria-label', 'Play the voice introduction');
+    });
+    audio.addEventListener('timeupdate', paint);
+    audio.addEventListener('loadedmetadata', paint);
+    audio.addEventListener('ended', function(){ audio.currentTime = 0; paint(); });
+    wave.addEventListener('click', function(e){
+      if (!audio.duration) return;
+      var r = wave.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+      paint();
+    });
+    paint();
+  }
 })();
 </script>
 </body></html>
