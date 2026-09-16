@@ -310,6 +310,14 @@
     padding:.6rem .95rem;font-size:.74rem;line-height:1.35;color:var(--ink-faint);
     border-top:1px solid var(--line);
   }
+  .proof-audio{
+    display:flex;flex-direction:column;justify-content:center;gap:1rem;
+    padding:1.8rem 1.6rem;background:var(--surface-2);border-right:1px solid var(--line);
+  }
+  .proof-audio svg{width:54px;height:auto;color:var(--wine);}
+  .proof-audio audio{width:100%;}
+  .proof-audio figcaption{font-size:.74rem;line-height:1.35;color:var(--ink-faint);}
+  @media (max-width:860px){.proof-audio{border-right:none;border-bottom:1px solid var(--line);padding:1.4rem 1.15rem;}}
   .proof-body{padding:1.5rem 1.6rem;display:flex;flex-direction:column;justify-content:center;}
   .proof-body h4{font-size:1.15rem;line-height:1.25;margin:0;}
   .proof-body h5{
@@ -504,7 +512,8 @@
   }
   /* ---------- mobile hardening / overflow ---------- */
   html,body{max-width:100%;overflow-x:hidden;}
-  img,svg,video,audio,iframe,canvas{max-width:100%;height:auto;}
+  img,svg,video,iframe,canvas{max-width:100%;height:auto;}
+  audio{max-width:100%;}
   .wrap,.nav-inner{min-width:0;}
   .wrap > *,.proof-item,.svc,.case,.tool-card{min-width:0;}
   a[href^="mailto:"],a[href^="tel:"]{overflow-wrap:anywhere;}
@@ -777,7 +786,7 @@
       <div class="section-head">
         <p class="eyebrow">Proof of Work</p>
         <h2>Samples clients can actually inspect</h2>
-        <p class="lede">Three artifacts from live campaigns. Client names, addresses, and phone numbers are redacted; the structure is left exactly as it runs. Each one comes with the reasoning behind how it is built.</p>
+        <p class="lede">Four artifacts from live campaigns. I painted out client names, addresses, and phone numbers. Everything else is exactly how it runs, and each one comes with why I built it that way.</p>
       </div>
       <div class="proof-list">
 
@@ -792,37 +801,63 @@
             <h4>CRM pipeline board</h4>
             <p>GoHighLevel Opportunities board for a Texas seller-lead campaign: 70 open opportunities moving across Offer Made, Long-Term Nurture, 30 Day Nurture, and Contract Sent, with call, SMS, note, and task activity logged on every card.</p>
             <h5>Why it is built this way</h5>
-            <p class="proof-why">The stages are named after the seller&rsquo;s decision, not after my activity. Offer Made and Contract Sent are the only two lanes that need something from someone today. Everyone who said <em>not yet</em> goes into a nurture lane, split by how long they asked me to wait &mdash; 30 days or long term. That split is the whole point: a lead that goes quiet stops inflating the active pipeline, and it still comes back on a date instead of quietly dying. Each card carries its own call, SMS, note, and task counts with the lead source attached, so an acquisition manager can open one cold and see the history without asking me what happened on it. I filter to one market at a time, because a board you have to scroll sideways to read is a board nobody checks.</p>
+            <p class="proof-why">The stages are named after the seller&rsquo;s decision, not after my activity. Offer Made and Contract Sent are the two lanes where somebody owes somebody an answer today. Everyone who said <em>not yet</em> goes into a nurture lane, sorted by how long they asked me to wait. That sorting is the part that matters. A lead who goes quiet stops padding the active pipeline, and it still comes back on a date instead of dying quietly in a list. Every card carries its own call, SMS, note, and task counts with the source attached, so an acquisition manager can open one cold and see what already happened without messaging me first. I keep the board filtered to one market at a time. A board you have to scroll sideways to read is a board nobody opens twice.</p>
           </div>
         </article>
 
         <article class="proof-item">
           <figure class="proof-shot">
             <a href="assets/appointment-tracker.jpg" target="_blank" rel="noopener" aria-label="Open the full-size appointment tracker sample">
-              <img src="assets/appointment-tracker.jpg" alt="Daily call sheet &mdash; offer claimed, lead condition, notes, and five outcome checkpoints" loading="lazy" decoding="async">
+              <img src="assets/appointment-tracker.jpg" alt="Daily call sheet: offer claimed, lead condition, notes, and five outcome checkpoints" loading="lazy" decoding="async">
             </a>
-            <figcaption>Daily call sheet &mdash; offer claimed, lead condition, notes, and five outcome checkpoints</figcaption>
+            <figcaption>Daily call sheet: offer claimed, lead condition, notes, and five outcome checkpoints</figcaption>
           </figure>
           <div class="proof-body">
             <h4>Appointment tracker</h4>
             <p>The live call sheet behind the campaign: offer claimed, lead condition, and the prospect&rsquo;s own notes per record, then Called, Booked, Showed, Package, and Sales checkpoints, with branch and booking date for every set appointment.</p>
             <h5>Why it is built this way</h5>
-            <p class="proof-why">The columns run in the order the call actually happens, so filling it in takes no thinking while I am still on the phone. The five checkpoints stay separate instead of collapsing into one status field, because the number that decides whether a campaign is working is the gap between <em>Booked</em> and <em>Showed</em> &mdash; a single status hides that gap, five columns make it impossible to miss. Colour carries the reporting: green rows moved forward, red rows stalled, so whoever opens the sheet reads outcomes before reading words. The notes column keeps the prospect&rsquo;s own phrasing and the time they asked to be reached, which is what lets the confirmation call sound like a continuation instead of a second cold call.</p>
+            <p class="proof-why">The columns run in the order the call actually happens, so filling it in takes no thinking while someone is still talking. The five checkpoints stay separate on purpose. Collapse them into one status field and you lose the number that tells you whether a campaign is working, which is the drop between <em>Booked</em> and <em>Showed</em>. Colour does the reporting for me: green moved forward, red stalled. Whoever opens the sheet reads outcomes before they read a single word. The notes column keeps the prospect&rsquo;s own phrasing and the time they asked to be called back, and that is what makes the confirmation call sound like a continuation instead of a second cold call.</p>
           </div>
         </article>
 
         <article class="proof-item">
           <figure class="proof-shot">
             <a href="assets/cold-call-script.jpg" target="_blank" rel="noopener" aria-label="Open the full-size cold call script sample">
-              <img src="assets/cold-call-script.jpg" alt="Seller-lead script &mdash; intro, property condition, price and timeline, loan question" loading="lazy" decoding="async">
+              <img src="assets/cold-call-script.jpg" alt="Seller-lead script: intro, property condition, price and timeline, loan question" loading="lazy" decoding="async">
             </a>
-            <figcaption>Seller-lead script &mdash; intro, property condition, price and timeline, loan question</figcaption>
+            <figcaption>Seller-lead script: intro, property condition, price and timeline, loan question</figcaption>
           </figure>
           <div class="proof-body">
             <h4>Cold call script</h4>
             <p>The seller-lead opener as it is actually run: intro and reason for the call, property condition, then price, timeline, and the loan-balance question that qualifies the deal.</p>
             <h5>Why it is built this way</h5>
-            <p class="proof-why">The whole thing is built for the first ten seconds. Name, reason for the call, then a permission question &mdash; <em>were you still looking to sell that one?</em> &mdash; because that is where a seller decides whether to stay on the line. I position myself as the owner&rsquo;s assistant rather than the decision maker on purpose: it takes the pressure off the call, keeps the closer&rsquo;s leverage intact, and makes booking the appointment the natural next step instead of a negotiation I was never there to have. The condition questions stay light and factual &mdash; roof, HVAC, repairs, recent updates &mdash; because they are easy to answer and they get the seller talking. Price and timeline come next, since those two decide whether the lead is worth an acquisition manager&rsquo;s hour. The mortgage question goes last, softened and announced as the last one, because it is the highest-friction question on the page and it only earns an honest answer after the rest of the call has done its work.</p>
+            <p class="proof-why">The whole thing is built for the first ten seconds. Name, reason for the call, then a question that gives them an easy way out: <em>were you still looking to sell that one?</em> That is where a seller decides whether to stay on the line. I introduce myself as the owner&rsquo;s assistant rather than the decision maker on purpose. It lowers the pressure, it keeps the closer&rsquo;s leverage where it belongs, and booking the appointment becomes the obvious next step instead of a negotiation I was never there to have. The condition questions stay light and factual, roof, HVAC, repairs, recent updates, because they are easy to answer and they get the seller talking. Price and timeline come next, since those two decide whether the lead is worth an acquisition manager&rsquo;s hour. The mortgage question goes last, softened and announced as the last one. It is the highest friction question on the page, and it only gets an honest answer once the rest of the call has done its work.</p>
+          </div>
+        </article>
+
+        <article class="proof-item">
+          <figure class="proof-audio">
+            <svg viewBox="0 0 64 40" fill="none" aria-hidden="true">
+              <g fill="currentColor">
+                <rect x="1" y="16" width="3" height="8" rx="1.5" opacity=".35"></rect>
+                <rect x="8" y="11" width="3" height="18" rx="1.5" opacity=".5"></rect>
+                <rect x="15" y="4" width="3" height="32" rx="1.5" opacity=".75"></rect>
+                <rect x="22" y="13" width="3" height="14" rx="1.5" opacity=".5"></rect>
+                <rect x="29" y="7" width="3" height="26" rx="1.5"></rect>
+                <rect x="36" y="14" width="3" height="12" rx="1.5" opacity=".5"></rect>
+                <rect x="43" y="9" width="3" height="22" rx="1.5" opacity=".7"></rect>
+                <rect x="50" y="15" width="3" height="10" rx="1.5" opacity=".4"></rect>
+                <rect x="57" y="18" width="3" height="4" rx="1.5" opacity=".3"></rect>
+              </g>
+            </svg>
+            <audio controls preload="none" src="assets/call-recording-sample.mp3"></audio>
+            <figcaption>Qualifying call, 2 minutes 6 seconds</figcaption>
+          </figure>
+          <div class="proof-body">
+            <h4>Call recording sample</h4>
+            <p>A recorded qualifying call: the opener, the condition questions, and the close to a booked appointment, run at real pace with a real seller on the line.</p>
+            <h5>Why it is built this way</h5>
+            <p class="proof-why">A script only shows what I planned to say. It says nothing about what happens when the seller picks up annoyed, talks over the opener, or wants to know who I am before I finish the second line. That part is what a client is hiring for. So the recording sits next to the script on purpose: read how the call is supposed to go, then hear it meet an actual person. Listen to the pace, and to who is doing most of the talking.</p>
           </div>
         </article>
 
