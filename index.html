@@ -292,30 +292,37 @@
   }
   .metric .lbl{font-size:.78rem;color:var(--ink-faint);letter-spacing:.05em;}
 
-  /* proof grid */
-  .proof-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1.2rem;
+  /* proof of work */
+  .proof-list{display:flex;flex-direction:column;gap:1.5rem;}
+  .proof-item{
+    display:grid;grid-template-columns:1.05fr .95fr;
+    border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);
+    transition:border-color var(--dur) var(--ease-soft);
   }
-  .proof{
-    border:1px solid var(--line);border-radius:16px;overflow:hidden;
-    background:var(--surface);display:flex;flex-direction:column;
-    transition:border-color var(--dur) var(--ease-soft),transform var(--dur) var(--ease-soft);
+  .proof-item:hover{border-color:var(--wine-soft);}
+  .proof-shot{
+    margin:0;display:flex;flex-direction:column;
+    background:var(--surface-2);border-right:1px solid var(--line);
   }
-  .proof:hover{border-color:var(--wine-soft);transform:translateY(-2px);}
-  .proof-thumb{
-    aspect-ratio:16/10;background:var(--surface-2);
-    display:flex;align-items:center;justify-content:center;
-    border-bottom:1px solid var(--line);
-    color:var(--wine);
+  .proof-shot a{display:block;line-height:0;}
+  .proof-shot img{width:100%;height:auto;display:block;}
+  .proof-shot figcaption{
+    padding:.6rem .95rem;font-size:.74rem;line-height:1.35;color:var(--ink-faint);
+    border-top:1px solid var(--line);
   }
-  .proof-thumb svg{width:64%;height:auto;}
-  .proof-meta{padding:1rem 1.1rem 1.15rem;}
-  .proof-meta h4{font-size:1rem;line-height:1.3;}
-  .proof-meta p{margin:.4rem 0 0;font-size:.85rem;color:var(--ink-soft);}
-  .proof-status{
-    display:inline-block;margin-top:.7rem;font-size:.76rem;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--ink-faint);
-    border:1px dashed var(--line-strong);border-radius:999px;padding:.15rem .55rem;
+  .proof-body{padding:1.5rem 1.6rem;display:flex;flex-direction:column;justify-content:center;}
+  .proof-body h4{font-size:1.15rem;line-height:1.25;margin:0;}
+  .proof-body h5{
+    margin:1.1rem 0 .4rem;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--gold);font-family:"Work Sans",sans-serif;font-weight:600;
+  }
+  .proof-body p{margin:.5rem 0 0;font-size:.88rem;color:var(--ink-soft);}
+  .proof-why{font-size:.9rem;}
+  .proof-why em{color:var(--ink);font-style:italic;}
+  @media (max-width:860px){
+    .proof-item{grid-template-columns:1fr;}
+    .proof-shot{border-right:none;border-bottom:1px solid var(--line);}
+    .proof-body{padding:1.3rem 1.15rem 1.5rem;}
   }
 
   /* services */
@@ -476,8 +483,6 @@
 
 
   /* proof icon micro-bounce */
-  .proof-thumb svg{transition:transform .35s var(--ease-soft);}
-  .proof:hover .proof-thumb svg{transform:scale(1.06) rotate(-2deg);}
 
   /* button click ripple */
   .btn,.nav-cta,.book-btn{position:relative;overflow:hidden;}
@@ -497,60 +502,17 @@
     #scroll-progress{transition:none;}
     .btn-ripple{display:none;}
   }
-  /* ---------------- in-page editor ---------------- */
-  #editor-toolbar{
-    position:fixed;right:1rem;bottom:1rem;z-index:200;
-    display:flex;gap:.5rem;align-items:center;
-    background:var(--surface);border-radius:999px;
-    padding:.5rem .6rem .5rem 1rem;box-shadow:0 6px 20px -6px rgba(0,0,0,.32);
-    font-family:"Work Sans",sans-serif;font-size:.82rem;color:var(--ink);
-  }
-  #editor-toolbar span{color:var(--ink-soft);white-space:nowrap;}
-  #editor-toolbar button{
-    font:inherit;font-size:.8rem;font-weight:500;cursor:pointer;border-radius:999px;
-    padding:.45rem 1rem;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);
-    transition:background var(--dur) var(--ease-soft),color var(--dur) var(--ease-soft),border-color var(--dur) var(--ease-soft);
-  }
-  #editor-toolbar button:hover{border-color:var(--wine);color:var(--wine);}
-  #editor-toolbar button.is-active{background:var(--wine);border-color:var(--wine);color:var(--panel-ink);}
-  #editor-toolbar button.is-active:hover{color:var(--panel-ink);}
-  body.editing [contenteditable="true"]:hover{
-    outline:1.5px dashed var(--wine-soft);outline-offset:2px;border-radius:4px;cursor:text;
-  }
-  body.editing [contenteditable="true"]:focus{
-    outline:2px solid var(--wine);outline-offset:2px;border-radius:4px;
-  }
-  /* editable proof media */
-  .proof-thumb img,.proof-thumb video{width:100%;height:100%;object-fit:cover;display:block;}
-  .proof-thumb audio{width:88%;}
-  .proof-thumb .pm-file{
-    display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:1rem;text-align:center;
-    font-size:.82rem;color:var(--wine);text-decoration:none;word-break:break-all;
-  }
-  .pm-ui{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;}
-  .pm-ui button,.pm-ui label{
-    font:inherit;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-    background:transparent;border:1px solid var(--line-strong);border-radius:999px;
-    padding:.2rem .6rem;color:var(--ink-soft);
-  }
-  .pm-ui button:hover,.pm-ui label:hover{border-color:var(--wine);color:var(--wine);}
-  .proof-add{
-    border:1px dashed var(--line-strong);border-radius:16px;background:transparent;cursor:pointer;
-    min-height:120px;font:inherit;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;
-  }
-  .proof-add:hover{border-color:var(--wine);color:var(--wine);}
-
   /* ---------- mobile hardening / overflow ---------- */
   html,body{max-width:100%;overflow-x:hidden;}
   img,svg,video,audio,iframe,canvas{max-width:100%;height:auto;}
   .wrap,.nav-inner{min-width:0;}
-  .wrap > *,.proof,.svc,.case,.tool-card{min-width:0;}
+  .wrap > *,.proof-item,.svc,.case,.tool-card{min-width:0;}
   a[href^="mailto:"],a[href^="tel:"]{overflow-wrap:anywhere;}
   @media (max-width:560px){
     .wrap{padding:0 1.15rem;}
     .nav-inner{padding:.75rem 1.15rem;}
     .slot{white-space:normal;}
-    .proof-grid,.svc-grid,.tool-groups,.stat-strip{grid-template-columns:1fr;}
+    .svc-grid,.tool-groups,.stat-strip{grid-template-columns:1fr;}
     .hero h1{font-size:clamp(2rem,9vw,2.6rem);word-break:normal;overflow-wrap:break-word;}
   }
 
@@ -621,33 +583,13 @@
   @keyframes toast-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
   @media (prefers-reduced-motion: reduce){.toast{animation:none;}}
 
-  @media (max-width:640px){
-    #editor-toolbar{
-      left:.75rem;right:.75rem;bottom:.75rem;flex-wrap:wrap;justify-content:flex-end;
-      padding:.55rem .6rem;border-radius:14px;gap:.4rem;
-    }
-    #editor-toolbar span{flex:1 1 100%;white-space:normal;font-size:.76rem;line-height:1.3;}
-    #editor-toolbar button{padding:.45rem .85rem;}
-    #toast-stack{top:4.75rem;bottom:auto;left:.75rem;right:.75rem;max-width:none;}
-  }
 
-  /* placeholder badges: guidance while editing, hidden from visitors */
-  .proof-status{display:none;}
-  body.editing .proof-status{
-    display:block;text-transform:none;letter-spacing:.02em;line-height:1.35;
-    padding:.35rem .6rem;font-size:.74rem;color:var(--ink-soft);
-  }
-  @media print{ #editor-toolbar,#toast-stack{display:none;} }
+  @media print{ #toast-stack{display:none;} }
 
   </style>
 </head>
 <body class="band-dark">
 <div id="toast-stack" role="status" aria-live="polite"></div>
-<div id="editor-toolbar">
-  <span id="editor-status">Click "Edit" to fill in the dashed fields</span>
-  <button type="button" id="editor-toggle">Edit</button>
-  <button type="button" id="editor-download">Download</button>
-</div>
 
 
 <div id="scroll-progress" style="transform: scaleX(0);"></div>
@@ -835,123 +777,54 @@
       <div class="section-head">
         <p class="eyebrow">Proof of Work</p>
         <h2>Samples clients can actually inspect</h2>
-        <p class="lede">Redacted artifacts from live engagements plus practice samples, identifying client details removed, structure intact.</p>
+        <p class="lede">Three artifacts from live campaigns. Client names, addresses, and phone numbers are redacted; the structure is left exactly as it runs. Each one comes with the reasoning behind how it is built.</p>
       </div>
-      <div class="proof-grid">
-        <div class="proof">
-          <div class="proof-thumb">
-            <svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
-              <rect x="6" y="10" width="34" height="80" rx="4" fill="currentColor" opacity=".14"></rect>
-              <rect x="46" y="10" width="34" height="80" rx="4" fill="currentColor" opacity=".14"></rect>
-              <rect x="86" y="10" width="34" height="80" rx="4" fill="currentColor" opacity=".14"></rect>
-              <rect x="126" y="10" width="28" height="80" rx="4" fill="currentColor" opacity=".14"></rect>
-              <rect x="10" y="18" width="26" height="12" rx="3" fill="currentColor" opacity=".45"></rect>
-              <rect x="10" y="34" width="26" height="12" rx="3" fill="currentColor" opacity=".3"></rect>
-              <rect x="50" y="18" width="26" height="12" rx="3" fill="currentColor" opacity=".45"></rect>
-              <rect x="90" y="18" width="26" height="12" rx="3" fill="currentColor" opacity=".3"></rect>
-              <rect x="90" y="34" width="26" height="12" rx="3" fill="currentColor" opacity=".45"></rect>
-              <rect x="130" y="18" width="20" height="12" rx="3" fill="currentColor" opacity=".3"></rect>
-            </svg>
-          </div>
-          <div class="proof-meta">
+      <div class="proof-list">
+
+        <article class="proof-item">
+          <figure class="proof-shot">
+            <a href="assets/crm-pipeline-board.jpg" target="_blank" rel="noopener" aria-label="Open the full-size crm pipeline board sample">
+              <img src="assets/crm-pipeline-board.jpg" alt="GoHighLevel Opportunities board, Texas market, 70 open opportunities" loading="lazy" decoding="async">
+            </a>
+            <figcaption>GoHighLevel Opportunities board, Texas market, 70 open opportunities</figcaption>
+          </figure>
+          <div class="proof-body">
             <h4>CRM pipeline board</h4>
-            <p>GoHighLevel Opportunities board for a Texas seller-lead campaign: 70 live opportunities moving through Offer Made, 30 Day Nurture, Long-Term Nurture, and Contract Sent, with call, SMS, and task activity logged on every card.</p>
-            <span class="proof-status">Upload the GoHighLevel board screenshot (redact owner names and street addresses first)</span>
+            <p>GoHighLevel Opportunities board for a Texas seller-lead campaign: 70 open opportunities moving across Offer Made, Long-Term Nurture, 30 Day Nurture, and Contract Sent, with call, SMS, note, and task activity logged on every card.</p>
+            <h5>Why it is built this way</h5>
+            <p class="proof-why">The stages are named after the seller&rsquo;s decision, not after my activity. Offer Made and Contract Sent are the only two lanes that need something from someone today. Everyone who said <em>not yet</em> goes into a nurture lane, split by how long they asked me to wait &mdash; 30 days or long term. That split is the whole point: a lead that goes quiet stops inflating the active pipeline, and it still comes back on a date instead of quietly dying. Each card carries its own call, SMS, note, and task counts with the lead source attached, so an acquisition manager can open one cold and see the history without asking me what happened on it. I filter to one market at a time, because a board you have to scroll sideways to read is a board nobody checks.</p>
           </div>
-        </div>
+        </article>
 
-        <div class="proof">
-          <div class="proof-thumb">
-            <svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
-              <rect x="14" y="12" width="132" height="76" rx="4" fill="currentColor" opacity=".12"></rect>
-              <line x1="14" y1="30" x2="146" y2="30" stroke="currentColor" stroke-opacity=".35" stroke-width="2"></line>
-              <line x1="14" y1="46" x2="146" y2="46" stroke="currentColor" stroke-opacity=".2" stroke-width="1.5"></line>
-              <line x1="14" y1="62" x2="146" y2="62" stroke="currentColor" stroke-opacity=".2" stroke-width="1.5"></line>
-              <line x1="58" y1="12" x2="58" y2="88" stroke="currentColor" stroke-opacity=".2" stroke-width="1.5"></line>
-              <line x1="102" y1="12" x2="102" y2="88" stroke="currentColor" stroke-opacity=".2" stroke-width="1.5"></line>
-              <rect x="20" y="18" width="30" height="7" rx="3" fill="currentColor" opacity=".45"></rect>
-              <rect x="64" y="34" width="30" height="6" rx="3" fill="currentColor" opacity=".28"></rect>
-              <rect x="108" y="50" width="30" height="6" rx="3" fill="currentColor" opacity=".28"></rect>
-            </svg>
-          </div>
-          <div class="proof-meta">
+        <article class="proof-item">
+          <figure class="proof-shot">
+            <a href="assets/appointment-tracker.jpg" target="_blank" rel="noopener" aria-label="Open the full-size appointment tracker sample">
+              <img src="assets/appointment-tracker.jpg" alt="Daily call sheet &mdash; offer claimed, lead condition, notes, and five outcome checkpoints" loading="lazy" decoding="async">
+            </a>
+            <figcaption>Daily call sheet &mdash; offer claimed, lead condition, notes, and five outcome checkpoints</figcaption>
+          </figure>
+          <div class="proof-body">
             <h4>Appointment tracker</h4>
-            <p>The live call sheet behind the campaign: offer claimed, lead condition, and notes per record, then Called, Booked, Showed, Package, and Sales checkpoints, colour-coded by outcome, with branch and booking date for every set appointment.</p>
-            <span class="proof-status">Upload the tracker screenshot (hide the phone-number column first)</span>
+            <p>The live call sheet behind the campaign: offer claimed, lead condition, and the prospect&rsquo;s own notes per record, then Called, Booked, Showed, Package, and Sales checkpoints, with branch and booking date for every set appointment.</p>
+            <h5>Why it is built this way</h5>
+            <p class="proof-why">The columns run in the order the call actually happens, so filling it in takes no thinking while I am still on the phone. The five checkpoints stay separate instead of collapsing into one status field, because the number that decides whether a campaign is working is the gap between <em>Booked</em> and <em>Showed</em> &mdash; a single status hides that gap, five columns make it impossible to miss. Colour carries the reporting: green rows moved forward, red rows stalled, so whoever opens the sheet reads outcomes before reading words. The notes column keeps the prospect&rsquo;s own phrasing and the time they asked to be reached, which is what lets the confirmation call sound like a continuation instead of a second cold call.</p>
           </div>
-        </div>
+        </article>
 
-        <div class="proof">
-          <div class="proof-thumb">
-            <svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
-              <rect x="18" y="8" width="124" height="84" rx="5" fill="currentColor" opacity=".12"></rect>
-              <rect x="28" y="20" width="70" height="6" rx="3" fill="currentColor" opacity=".5"></rect>
-              <rect x="28" y="34" width="104" height="4" rx="2" fill="currentColor" opacity=".26"></rect>
-              <rect x="28" y="44" width="98" height="4" rx="2" fill="currentColor" opacity=".26"></rect>
-              <rect x="28" y="54" width="86" height="4" rx="2" fill="currentColor" opacity=".26"></rect>
-              <rect x="28" y="68" width="46" height="10" rx="4" fill="currentColor" opacity=".42"></rect>
-            </svg>
-          </div>
-          <div class="proof-meta">
+        <article class="proof-item">
+          <figure class="proof-shot">
+            <a href="assets/cold-call-script.jpg" target="_blank" rel="noopener" aria-label="Open the full-size cold call script sample">
+              <img src="assets/cold-call-script.jpg" alt="Seller-lead script &mdash; intro, property condition, price and timeline, loan question" loading="lazy" decoding="async">
+            </a>
+            <figcaption>Seller-lead script &mdash; intro, property condition, price and timeline, loan question</figcaption>
+          </figure>
+          <div class="proof-body">
             <h4>Cold call script</h4>
-            <p>The seller-lead opener as it is actually run: intro and reason for the call, property condition questions covering roof, HVAC, and repairs, then price, timeline, and the soft loan-balance question that qualifies the deal.</p>
-            <span class="proof-status">Upload the script document (remove the internal highlighted lines first)</span>
+            <p>The seller-lead opener as it is actually run: intro and reason for the call, property condition, then price, timeline, and the loan-balance question that qualifies the deal.</p>
+            <h5>Why it is built this way</h5>
+            <p class="proof-why">The whole thing is built for the first ten seconds. Name, reason for the call, then a permission question &mdash; <em>were you still looking to sell that one?</em> &mdash; because that is where a seller decides whether to stay on the line. I position myself as the owner&rsquo;s assistant rather than the decision maker on purpose: it takes the pressure off the call, keeps the closer&rsquo;s leverage intact, and makes booking the appointment the natural next step instead of a negotiation I was never there to have. The condition questions stay light and factual &mdash; roof, HVAC, repairs, recent updates &mdash; because they are easy to answer and they get the seller talking. Price and timeline come next, since those two decide whether the lead is worth an acquisition manager&rsquo;s hour. The mortgage question goes last, softened and announced as the last one, because it is the highest-friction question on the page and it only earns an honest answer after the rest of the call has done its work.</p>
           </div>
-        </div>
-
-        <div class="proof">
-          <div class="proof-thumb">
-            <svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
-              <rect x="22" y="14" width="60" height="26" rx="6" fill="currentColor" opacity=".3"></rect>
-              <rect x="78" y="46" width="60" height="26" rx="6" fill="currentColor" opacity=".18"></rect>
-              <rect x="22" y="70" width="48" height="20" rx="6" fill="currentColor" opacity=".24"></rect>
-              <path d="M52 40 L52 52 L96 52" stroke="currentColor" stroke-opacity=".4" stroke-width="2" fill="none"></path>
-              <path d="M96 72 L96 82 L60 82" stroke="currentColor" stroke-opacity=".4" stroke-width="2" fill="none"></path>
-            </svg>
-          </div>
-          <div class="proof-meta">
-            <h4>Follow-up sequence</h4>
-            <p>Multi-touch call, SMS, and email cadence with timing and branching for no-answer, callback, and not-interested outcomes.</p>
-            <span class="proof-status">Workflow to add</span>
-          </div>
-        </div>
-
-        <div class="proof">
-          <div class="proof-thumb">
-            <svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
-              <circle cx="80" cy="50" r="30" fill="currentColor" opacity=".14"></circle>
-              <path d="M71 38 L96 50 L71 62 Z" fill="currentColor" opacity=".5"></path>
-              <rect x="34" y="84" width="92" height="5" rx="2.5" fill="currentColor" opacity=".22"></rect>
-              <rect x="34" y="84" width="36" height="5" rx="2.5" fill="currentColor" opacity=".5"></rect>
-            </svg>
-          </div>
-          <div class="proof-meta">
-            <h4>Call recording sample</h4>
-            <p>Short clip of a live qualifying call, with prospect details removed, tone, pacing, and objection handling audible.</p>
-            <span class="proof-status">Audio to add</span>
-          </div>
-        </div>
-
-        <div class="proof">
-          <div class="proof-thumb">
-            <svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
-              <rect x="30" y="8" width="100" height="84" rx="5" fill="currentColor" opacity=".12"></rect>
-              <circle cx="44" cy="24" r="4" fill="currentColor" opacity=".5"></circle>
-              <rect x="54" y="21" width="58" height="5" rx="2.5" fill="currentColor" opacity=".38"></rect>
-              <circle cx="44" cy="42" r="4" fill="currentColor" opacity=".38"></circle>
-              <rect x="54" y="39" width="46" height="5" rx="2.5" fill="currentColor" opacity=".26"></rect>
-              <circle cx="44" cy="60" r="4" fill="currentColor" opacity=".38"></circle>
-              <rect x="54" y="57" width="52" height="5" rx="2.5" fill="currentColor" opacity=".26"></rect>
-              <circle cx="44" cy="78" r="4" fill="currentColor" opacity=".38"></circle>
-              <rect x="54" y="75" width="38" height="5" rx="2.5" fill="currentColor" opacity=".26"></rect>
-            </svg>
-          </div>
-          <div class="proof-meta">
-            <h4>SOP document</h4>
-            <p>Step-by-step process doc for lead intake and CRM entry, the kind handed to a new VA joining the account.</p>
-            <span class="proof-status">Document to add</span>
-          </div>
-        </div>
+        </article>
 
       </div>
     </div>
@@ -1284,181 +1157,6 @@
 })();
 </script>
 
-<script>
-(function(){
-  var toggleBtn = document.getElementById('editor-toggle');
-  var downloadBtn = document.getElementById('editor-download');
-  var status = document.getElementById('editor-status');
-  document.querySelectorAll('#proof h4, #proof .proof-meta p, #proof .proof-status').forEach(function(el){
-    if (!el.hasAttribute('data-slot')) el.setAttribute('data-slot','proof');
-  });
-  var slots = Array.prototype.slice.call(document.querySelectorAll('[data-slot]'));
-  var editing = false;
-
-  function setEditing(on){
-    editing = on;
-    document.body.classList.toggle('editing', editing);
-    slots.forEach(function(el){ el.setAttribute('contenteditable', editing ? 'true' : 'false'); });
-    toggleBtn.textContent = editing ? 'Done editing' : 'Edit';
-    toggleBtn.classList.toggle('is-active', editing);
-    status.textContent = editing
-      ? 'Click any dashed field and type. Click "Done editing" when finished.'
-      : 'Click "Edit" to fill in the dashed fields';
-    setProofEditing(editing);
-  }
-
-  slots.forEach(function(el){
-    el.addEventListener('focus', function(){
-      if (!editing) return;
-      if (!el.dataset.touched) {
-        el.dataset.touched = '1';
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-      }
-    });
-  });
-
-  toggleBtn.addEventListener('click', function(){ setEditing(!editing); });
-
-  downloadBtn.addEventListener('click', function(){
-    var clone = document.documentElement.cloneNode(true);
-    var toolbar = clone.querySelector('#editor-toolbar');
-    if (toolbar) toolbar.remove();
-    clone.querySelectorAll('.pm-ui, .proof-add, .toast').forEach(function(el){ el.remove(); });
-    var navMenu = clone.querySelector('.nav-links');
-    if (navMenu) navMenu.classList.remove('is-open');
-    var navBtn = clone.querySelector('#nav-toggle');
-    if (navBtn) navBtn.setAttribute('aria-expanded','false');
-    var progressBar = clone.querySelector('#scroll-progress');
-    if (progressBar) progressBar.style.transform = 'scaleX(0)';
-    clone.querySelectorAll('[data-slot]').forEach(function(el){
-      el.removeAttribute('contenteditable');
-      el.removeAttribute('data-slot');
-      el.removeAttribute('spellcheck');
-      // only drop the dashed-placeholder look for fields you actually edited;
-      // anything left untouched stays visibly flagged in the download
-      if (el.dataset.touched) {
-        el.removeAttribute('data-touched');
-        el.classList.remove('slot');
-      }
-    });
-    clone.querySelector('body').classList.remove('editing');
-
-    var html = '<!doctype html>\n' + clone.outerHTML;
-    var blob = new Blob([html], {type: 'text/html'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'cloie-cagas-portfolio.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
-    window.toast('Saved. Check your Downloads folder for the updated page.', 'ok');
-  });
-
-
-  // ---- proof media: upload or link anything, per card ----
-  var grid = document.querySelector('.proof-grid');
-
-  function setMedia(card, url, name, kind){
-    var thumb = card.querySelector('.proof-thumb');
-    var ext = (name || url).split('?')[0].split('.').pop().toLowerCase();
-    if (!kind) {
-      kind = /^(png|jpe?g|gif|webp|avif|svg|bmp)$/.test(ext) ? 'image'
-           : /^(mp4|webm|mov|m4v)$/.test(ext) ? 'video'
-           : /^(mp3|wav|m4a|ogg|aac)$/.test(ext) ? 'audio' : 'file';
-    }
-    thumb.innerHTML = '';
-    var el;
-    if (kind === 'image') { el = new Image(); el.src = url; el.alt = name || ''; }
-    else if (kind === 'video' || kind === 'audio') {
-      el = document.createElement(kind); el.src = url; el.controls = true;
-    } else {
-      el = document.createElement('a');
-      el.className = 'pm-file'; el.href = url; el.target = '_blank'; el.rel = 'noopener';
-      el.textContent = name || url;
-    }
-    thumb.appendChild(el);
-    var status = card.querySelector('.proof-status');
-    if (status) status.remove();
-  }
-
-  function addControls(card){
-    if (card.querySelector('.pm-ui')) return;
-    var bar = document.createElement('div');
-    bar.className = 'pm-ui';
-    bar.innerHTML = '<label>Upload<input type="file" hidden></label>' +
-                    '<button type="button" data-act="link">Link</button>' +
-                    '<button type="button" data-act="clear">Clear</button>' +
-                    '<button type="button" data-act="remove">Delete card</button>';
-    card.querySelector('.proof-meta').appendChild(bar);
-
-    bar.querySelector('input[type=file]').addEventListener('change', function(){
-      var f = this.files[0];
-      if (!f) return;
-      if (f.size > 8 * 1024 * 1024 &&
-          !confirm('That file is ' + Math.round(f.size / 1048576) + 'MB. It gets embedded in the page and will make the download large. Continue?')) return;
-      var fr = new FileReader();
-      fr.onload = function(){
-        setMedia(card, fr.result, f.name, f.type.split('/')[0]);
-        window.toast('Added ' + f.name + ' to this card.', 'ok');
-      };
-      fr.onerror = function(){ window.toast('Could not read that file. Try another one.', 'err'); };
-      fr.readAsDataURL(f);
-    });
-
-    bar.addEventListener('click', function(e){
-      var act = e.target.dataset.act;
-      if (act === 'link') {
-        var u = prompt('Paste a link (Drive, Loom, YouTube, image URL, anything):');
-        if (u === null) return;
-        u = u.trim();
-        if (!/^(https?:\/\/|\/|\.\/)/i.test(u)) {
-          window.toast('That does not look like a link. It should start with https://', 'err');
-          return;
-        }
-        setMedia(card, u, u);
-        window.toast('Link added to this card.', 'ok');
-      } else if (act === 'clear') {
-        card.querySelector('.proof-thumb').innerHTML = '';
-        window.toast('Media cleared.', 'ok');
-      } else if (act === 'remove') {
-        if (confirm('Delete this card?')) card.remove();
-      }
-    });
-  }
-
-  var addBtn = document.createElement('button');
-  addBtn.type = 'button';
-  addBtn.className = 'proof-add';
-  addBtn.textContent = '+ Add item';
-  addBtn.addEventListener('click', function(){
-    var card = document.createElement('div');
-    card.className = 'proof';
-    card.innerHTML = '<div class="proof-thumb"></div><div class="proof-meta">' +
-      '<h4 data-slot="proof">Title</h4>' +
-      '<p data-slot="proof">Short description of what this shows.</p></div>';
-    grid.insertBefore(card, addBtn);
-    card.querySelectorAll('[data-slot]').forEach(function(el){ el.setAttribute('contenteditable','true'); });
-    addControls(card);
-  });
-
-  function setProofEditing(on){
-    if (!grid) return;
-    grid.querySelectorAll('.proof').forEach(on ? addControls : function(card){
-      var bar = card.querySelector('.pm-ui');
-      if (bar) bar.remove();
-    });
-    if (on) grid.appendChild(addBtn); else addBtn.remove();
-  }
-
-  setEditing(false);
-})();
-</script>
 
 
 

@@ -9,19 +9,15 @@ and CRM management for real estate and insurance teams.
 | --- | --- |
 | `index.html` | The entire site. No build step, no dependencies. |
 | `404.html` | Custom not-found page, served automatically by Vercel. |
+| `assets/` | Redacted screenshots used in the Proof of Work section. |
 
 ## Editing the page
 
-Open `index.html` in a browser and click **Edit** (bottom right):
+Edit `index.html` directly, then commit and push — Vercel redeploys on every push to `main`.
 
-- Any dashed field becomes editable — type straight into it.
-- Each Proof of Work card gets **Upload**, **Link**, **Clear**, and **Delete card**.
-  Uploads are embedded in the page itself, so nothing else needs hosting.
-- **+ Add item** creates a new Proof of Work card.
-- **Download** saves the edited page back out as a complete HTML file.
-
-To publish those edits, replace `index.html` with the downloaded file, then commit and push —
-Vercel redeploys on every push to `main`.
+Proof of Work samples live in `assets/`. Client names, street addresses, and phone numbers
+are painted out of those screenshots before they go in; the unredacted originals are kept
+outside this repository.
 
 ## Deploying
 
