@@ -9,7 +9,7 @@ and CRM management for real estate and insurance teams.
 | --- | --- |
 | `index.html` | The entire site. No build step, no dependencies. |
 | `404.html` | Custom not-found page, served automatically by Vercel. |
-| `assets/` | Redacted screenshots used in the Proof of Work section. |
+| `assets/` | Redacted Proof of Work screenshots and the voice introduction audio. |
 
 ## Editing the page
 
