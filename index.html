@@ -11,7 +11,13 @@
 <meta property="og:title" content="Cloie Eunice C. Cagas, Virtual Assistant">
 <meta property="og:description" content="Cloie Eunice C. Cagas, virtual assistant specialising in lead generation, appointment setting, and CRM management for real estate and insurance teams.">
 <meta property="og:locale" content="en_PH">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://cloie-cagas-portfolio.vercel.app/">
+<meta property="og:image" content="https://cloie-cagas-portfolio.vercel.app/assets/og-card.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="559">
+<meta property="og:image:alt" content="Abstract crimson line crossing three gold markers on a near-black field">
+<meta name="twitter:image" content="https://cloie-cagas-portfolio.vercel.app/assets/og-card.jpg">
 
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 64 64&quot;&gt;&lt;rect width=&quot;64&quot; height=&quot;64&quot; rx=&quot;14&quot; fill=&quot;%23161616&quot;/&gt;&lt;text x=&quot;32&quot; y=&quot;44&quot; font-family=&quot;Arial,Helvetica,sans-serif&quot; font-weight=&quot;bold&quot; font-size=&quot;30&quot; fill=&quot;%23F04A64&quot; text-anchor=&quot;middle&quot;&gt;CC&lt;/text&gt;&lt;/svg&gt;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -705,16 +711,20 @@
   }
   .quote blockquote,.quote figcaption{position:relative;z-index:1;}
 
-  /* hero dot grid + arc */
-  header.hero .wrap{position:relative;}
-  header.hero .wrap::before{
-    content:"";position:absolute;inset:-2rem 0 auto;height:min(420px,70%);z-index:0;pointer-events:none;
-    background-image:radial-gradient(currentColor 1px,transparent 1px);
-    background-size:26px 26px;color:var(--wine);opacity:.09;
-    -webkit-mask-image:radial-gradient(60% 70% at 18% 30%,#000,transparent 72%);
-    mask-image:radial-gradient(60% 70% at 18% 30%,#000,transparent 72%);
+  /* hero artwork, kept barely there behind the copy */
+  header.hero{position:relative;}
+  header.hero::after{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:url("assets/hero-art.jpg") no-repeat right top;
+    background-size:cover;
+    mix-blend-mode:screen;opacity:.32;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0 34%,#000 68%);
+    mask-image:linear-gradient(90deg,transparent 0 34%,#000 68%);
   }
-  header.hero .hero-grid,header.hero .trust{position:relative;z-index:1;}
+  header.hero .wrap{position:relative;z-index:1;}
+  @media (max-width:860px){
+    header.hero::after{opacity:.24;-webkit-mask-image:linear-gradient(180deg,#000 0 40%,transparent 72%);mask-image:linear-gradient(180deg,#000 0 40%,transparent 72%);}
+  }
 
   /* contact panel signal arcs */
   .contact-panel{position:relative;overflow:hidden;}
