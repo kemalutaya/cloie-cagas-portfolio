@@ -586,20 +586,6 @@
   }
   .tool-card li[data-tip]:hover::after,.tool-card li[data-tip]:focus-visible::after{opacity:1;transform:none;}
 
-  /* marquee (watermelon) */
-  .marquee{
-    margin-top:2rem;display:flex;gap:1rem;overflow:hidden;
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  }
-  .marquee-row{display:flex;gap:1rem;flex:none;animation:marquee-x 38s linear infinite;}
-  .marquee:hover .marquee-row{animation-play-state:paused;}
-  .marquee span{
-    flex:none;font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);
-    border:1px solid var(--line);border-radius:999px;padding:.35rem .9rem;white-space:nowrap;
-  }
-  @keyframes marquee-x{to{transform:translateX(calc(-100% - 1rem));}}
 
   /* progressive blur + lightbox (motion-primitives) */
   .proof-shot{position:relative;}
@@ -662,7 +648,6 @@
   .copy-email.is-copied .cp-done{opacity:1;transform:none;filter:blur(0);position:static;}
 
   @media (max-width:560px){
-    .marquee-row{animation-duration:24s;}
     .shot-btn{max-height:240px;}
     .wp-wave i{min-width:1px;}
     .wp-wave i:nth-child(n+25){display:none;}
@@ -670,7 +655,7 @@
     .wp-time{font-size:.72rem;}
   }
   @media (prefers-reduced-motion: reduce){
-    .case--trail::after,.glow-wrap::before,.marquee-row{animation:none;}
+    .case--trail::after,.glow-wrap::before{animation:none;}
     .te span{animation:none;opacity:1;transform:none;filter:none;}
   }
 
@@ -813,6 +798,8 @@
     .contact-links a,.footer-col a{padding-block:.55rem;}
     .nav-mark{padding-block:.35rem;}
   }
+
+
 
   /* ---------- mobile hardening / overflow ---------- */
   html,body{max-width:100%;overflow-x:hidden;}
@@ -1383,10 +1370,6 @@
           <ul><li>Canva</li><li>CapCut</li><li>LinkedIn</li></ul>
         </div>
       </div>
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-row"><span>GoHighLevel</span><span>REISift</span><span>Convoso</span><span>Launch Control</span><span>SalesQL</span><span>Flowchat</span><span>Zillow</span><span>Redfin</span><span>Google Workspace</span><span>Google Calendar</span><span>Outlook</span><span>Trello</span><span>Notion</span><span>Canva</span><span>CapCut</span><span>LinkedIn</span></div>
-        <div class="marquee-row"><span>GoHighLevel</span><span>REISift</span><span>Convoso</span><span>Launch Control</span><span>SalesQL</span><span>Flowchat</span><span>Zillow</span><span>Redfin</span><span>Google Workspace</span><span>Google Calendar</span><span>Outlook</span><span>Trello</span><span>Notion</span><span>Canva</span><span>CapCut</span><span>LinkedIn</span></div>
-      </div>
     </div>
   </section>
 
@@ -1763,5 +1746,6 @@
   });
 })();
 </script>
+
 
 </body></html>
