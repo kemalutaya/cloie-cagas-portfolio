@@ -715,24 +715,28 @@
   header.hero{position:relative;}
   header.hero::after{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:url("assets/hero-art.jpg") no-repeat right top;
+    background:url("assets/hero-art.jpg") no-repeat right center;
     background-size:cover;
-    mix-blend-mode:screen;opacity:.32;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0 34%,#000 68%);
-    mask-image:linear-gradient(90deg,transparent 0 34%,#000 68%);
+    mix-blend-mode:screen;opacity:.3;
+    -webkit-mask-image:radial-gradient(115% 95% at 100% 48%,#000 18%,rgba(0,0,0,.55) 45%,transparent 76%);
+    mask-image:radial-gradient(115% 95% at 100% 48%,#000 18%,rgba(0,0,0,.55) 45%,transparent 76%);
   }
   header.hero .wrap{position:relative;z-index:1;}
   @media (max-width:860px){
-    header.hero::after{opacity:.24;-webkit-mask-image:linear-gradient(180deg,#000 0 40%,transparent 72%);mask-image:linear-gradient(180deg,#000 0 40%,transparent 72%);}
+    header.hero::after{
+      opacity:.2;
+      -webkit-mask-image:radial-gradient(130% 70% at 82% 22%,#000 12%,rgba(0,0,0,.5) 42%,transparent 74%);
+      mask-image:radial-gradient(130% 70% at 82% 22%,#000 12%,rgba(0,0,0,.5) 42%,transparent 74%);
+    }
   }
 
   /* contact panel signal arcs */
   .contact-panel{position:relative;overflow:hidden;}
   .contact-panel::after{
     content:"";position:absolute;right:-90px;top:-70px;width:340px;height:340px;z-index:0;pointer-events:none;
-    border-radius:50%;opacity:.5;
+    border-radius:50%;opacity:.38;
     background:
-      radial-gradient(circle,transparent 0 44%,color-mix(in srgb,var(--panel-ink) 16%,transparent) 44.5% 45.5%,transparent 46%),
+      radial-gradient(circle,transparent 0 44%,color-mix(in srgb,var(--panel-ink) 13%,transparent) 44.5% 45.5%,transparent 46%),
       radial-gradient(circle,transparent 0 62%,color-mix(in srgb,var(--panel-ink) 13%,transparent) 62.5% 63.5%,transparent 64%),
       radial-gradient(circle,transparent 0 80%,color-mix(in srgb,var(--panel-ink) 10%,transparent) 80.5% 81.5%,transparent 82%);
   }
@@ -775,6 +779,26 @@
   @media (prefers-reduced-motion: reduce){
     .js .case-row{opacity:1;transform:none;transition:none;}
     .case-id::after{transition:none;}
+  }
+
+
+  /* ---------- bauhaus pattern ---------- */
+  #services{position:relative;isolation:isolate;}
+  #services::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:url("assets/pattern-bauhaus.jpg") repeat center/620px auto;
+    opacity:.08;
+  }
+  .contact-panel::before{
+    content:"";position:absolute;right:0;top:0;bottom:0;width:38%;z-index:0;pointer-events:none;
+    background:url("assets/pattern-bauhaus.jpg") no-repeat right center/cover;
+    opacity:.42;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 62%);
+    mask-image:linear-gradient(90deg,transparent,#000 62%);
+  }
+  @media (max-width:560px){
+    #services::before{background-size:380px auto;opacity:.06;}
+    .contact-panel::before{width:52%;opacity:.3;}
   }
 
   /* ---------- mobile hardening / overflow ---------- */
@@ -1663,4 +1687,5 @@
   });
 })();
 </script>
+
 </body></html>
