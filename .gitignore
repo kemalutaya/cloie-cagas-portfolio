@@ -4,3 +4,6 @@ Thumbs.db
 node_modules/
 
 .vercel
+
+# keep stray documents out of the site
+*.pdf
