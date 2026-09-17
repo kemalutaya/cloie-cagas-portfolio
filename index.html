@@ -742,6 +742,41 @@
     .contact-panel::after{width:220px;height:220px;right:-70px;}
   }
 
+
+  /* ---------- pinned case studies ---------- */
+  .case{align-items:start;}
+  @media (min-width:781px){
+    .case-id{
+      position:sticky;top:5.5rem;align-self:start;
+      border-right:none;
+    }
+    .case-id::before{
+      content:"";position:absolute;top:.2rem;bottom:.2rem;right:0;width:1px;
+      background:var(--line);
+    }
+    .case-id::after{
+      content:"";position:absolute;top:.2rem;right:0;width:1px;
+      height:calc((100% - .4rem) * var(--p,0));
+      background:linear-gradient(var(--wine),var(--gold));
+      transition:height .45s var(--ease-soft);
+    }
+  }
+  .js .case-row{
+    opacity:0;transform:translateY(14px);
+    transition:opacity .55s var(--ease-out),transform .55s var(--ease-out);
+    transition-delay:calc(var(--d,0) * 90ms);
+  }
+  .js .case-row.is-in{opacity:1;transform:none;}
+  .case-row .k{
+    position:relative;
+    transition:color .45s var(--ease-soft);
+  }
+  .case-row.is-in .k{color:var(--wine);}
+  @media (prefers-reduced-motion: reduce){
+    .js .case-row{opacity:1;transform:none;transition:none;}
+    .case-id::after{transition:none;}
+  }
+
   /* ---------- mobile hardening / overflow ---------- */
   html,body{max-width:100%;overflow-x:hidden;}
   img,svg,video,iframe,canvas{max-width:100%;height:auto;}
@@ -833,6 +868,7 @@
   </style>
 </head>
 <body class="band-dark">
+<script>document.documentElement.classList.add('js');</script>
 <div id="toast-stack" role="status" aria-live="polite"></div>
 
 
@@ -1589,6 +1625,42 @@
     });
     paint();
   }
+})();
+</script>
+
+<script>
+(function(){
+  // case study rows advance as the card scrolls, and the sticky column tracks progress
+  var cases = Array.prototype.slice.call(document.querySelectorAll('.case'));
+  if (!cases.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.case-row').forEach(function(r){ r.classList.add('is-in'); });
+    return;
+  }
+
+  cases.forEach(function(card){
+    var rows = Array.prototype.slice.call(card.querySelectorAll('.case-row'));
+    var id = card.querySelector('.case-id');
+    rows.forEach(function(row, i){ row.style.setProperty('--d', i % 3); });
+
+    function progress(){
+      var done = rows.filter(function(r){ return r.classList.contains('is-in'); }).length;
+      if (id) id.style.setProperty('--p', (done / rows.length).toFixed(3));
+    }
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+      progress();
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+
+    rows.forEach(function(row){ io.observe(row); });
+  });
 })();
 </script>
 </body></html>
